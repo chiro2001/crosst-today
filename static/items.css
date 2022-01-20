@@ -1,0 +1,116 @@
+.festival h1 {
+  margin: 0px 0.5rem;
+  font-size: 1.2rem; font-weight: normal;
+  text-align: left;
+  color: #9897c9;
+}
+.festival-name {
+  font-size: 1.25rem; font-weight: bold;
+  color: #9e75d3;
+}
+.festival p {
+  margin: 0.5rem 0.8rem;
+  font-size: 1rem; font-weight: normal;
+  text-align: left; text-indent: 1rem;
+  color: #8080c3;
+}
+.festival hr {
+  height: 2px; width: auto;
+  margin: 0.5rem 0.8rem; padding: 0px;
+  display: block;
+  border: none; border-radius: 1px;
+  background: #99aad7;
+}
+
+.rare-word h1 {
+  margin: 0px 0.6rem; padding: 0px;
+  font-size: 1rem; font-weight: bold;
+  color: #9e75d3;
+}
+.rw-inner {
+  margin:0px; padding: 0px;
+  display: flex; flex-direction: row; align-items: center;
+}
+.pinyin {
+  margin: 0px;padding: 0px;
+  font-size: 1.1rem; font-weight: normal;
+  color: #4e4e56;
+}
+.rw-inner h2 {
+  height: auto; width: auto;
+  font-family: "楷体", "宋体", sans-serif;
+  margin: 0.2rem 1.5rem 1rem 1.5rem; padding: 0px;
+  font-size: 3.5rem; font-weight: normal;
+  background: #eeeeef; color: #222;
+  border: 2px solid #222;
+  box-shadow: 1px 1px 2px #555;
+}
+.rw-inner ul {
+  margin: 0.5rem 0px 0.5rem 1rem;
+  font-size: 1rem; font-weight: normal;
+  text-align: left; list-style: square;
+  color: #8080c3;
+}
+.rw-inner ul li { margin: 0.2rem 0px; }
+.rw-def { font-weight: bold; }
+@media screen and ( max-width: 680px ) {
+  .rw-inner { flex-direction: column; }
+}
+
+.word h1 {
+  margin: 0px 0.6rem; padding: 0px;
+  font-size: 1rem; font-weight: bold;
+  color: #9e75d3;
+}
+.word h2 {
+  margin: 0px 1rem; padding: 0px;
+  display: flex; flex-direction: row; align-items: center;
+  font-size: 1.8rem; font-weight: lighter;
+  text-align: left;
+  color: #5e5d7c;
+}
+.word-ps {
+  margin: 0px 0.7rem; padding: 0px;
+  font-size: 1.2rem; font-weight: bold;
+  display: inline-block;
+  color: #8080c3;
+}
+.word ul {
+  margin: 0.5rem 1.5rem; padding: 0px;
+  font-size: 1rem; font-weight: normal;
+  text-align: left; list-style: none;
+  color: #8080c3;
+}
+.word ul li { margin: 0.3rem 0px; }
+.word-prop {
+  margin: 0px 0.3rem; padding: 0px 0.3rem;
+  font-size: 1.1rem; font-weight: bold;
+  text-align: center;
+  background: #8c6fe3; color: #eeeefb;
+  border-radius: 0.3rem;
+}
+@media screen and ( max-width: 680px ) {
+  .word h2 { flex-direction: column; }
+}
+
+.poem h1 {
+  margin: 0px 0.6rem; padding: 0px;
+  font-size: 1rem; font-weight: bold;
+  color: #9e75d3;
+}
+.poem h2 {
+  margin: 0.5rem 1rem; padding: 0px;
+  font-size: 1.5rem; font-weight: lighter; text-align: center;
+  color: #5e5d7c;
+}
+.poem-author {
+  margin: 0.5rem 2rem; padding: 0px;
+  font-size: 1rem; font-weight: bold;
+  text-align: right;
+  color: #8080c3;
+}
+.poem-author .source {
+  font-size: 1rem; font-weight: normal;
+  color: #8c6fe3;
+}
+.poem-author .en { font-style: italic; }

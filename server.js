@@ -9,7 +9,8 @@ const GithubStrategy = require('passport-github').Strategy
 const { stringify } = require('flatted')
 const _ = require('underscore')
 
-const getGitHubData = require('./api')
+const { getGitHubData, updateGithubData } = require('./api')
+let lastUpdateTime = null;
 
 // import env variables
 require('dotenv').config()
@@ -54,6 +55,8 @@ app.use(passport.session())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use(express.static('static'))
+
 const hbs = exphbs.create({
   layoutsDir: __dirname + '/views'
 })
@@ -62,26 +65,28 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 
 app.get('/', async (req, res) => {
-  let data = {
-    session: req.cookies[COOKIE] && JSON.parse(req.cookies[COOKIE])
-  }
+  // let data = {
+  //   session: req.cookies[COOKIE] && JSON.parse(req.cookies[COOKIE])
+  // }
 
-  if (data.session && data.session.token) {
-    let githubData
-    try {
-      githubData = await getGitHubData(data.session.token)
-    } catch (error) {
-      githubData = { error: error }
-    }
-    _.extend(data, githubData)
-  }
+  // if (data.session && data.session.token) {
+  //   let githubData
+  //   try {
+  //     githubData = await getGitHubData(data.session.token)
+  //   } catch (error) {
+  //     githubData = { error: error }
+  //   }
+  //   _.extend(data, githubData)
+  // }
 
-  if (data.session) {
-    data.session.token = 'mildly obfuscated.'
-  }
-  data.json = stringify(data, null, 2)
+  // if (data.session) {
+  //   data.session.token = 'mildly obfuscated.'
+  // }
+  // data.json = stringify(data, null, 2)
 
-  res.render('main', data)
+  // res.render('main', data)
+
+  res.render('main', data);
 })
 
 app.get('/logoff', function (req, res) {
