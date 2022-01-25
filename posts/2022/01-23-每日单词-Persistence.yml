@@ -1,0 +1,11 @@
+type: word
+data:
+  word: Persistence
+  ps: pərˈsɪstəns
+  meannings:
+    - type: n.
+      meanning: 坚持；持续存在；锲而不舍；维持
+    - type: v.
+      meanning: 坚持；持续存在；锲而不舍；维持
+    - type: adj.
+      meanning: 坚持；持续存在；锲而不舍；维持

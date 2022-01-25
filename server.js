@@ -9,7 +9,7 @@ const GithubStrategy = require('passport-github').Strategy
 const { stringify } = require('flatted')
 const _ = require('underscore')
 
-const { getGitHubData, updateGithubData } = require('./api')
+const { getGitHubData, updateGithubData, getDateInfo } = require('./api')
 let lastUpdateTime = null;
 
 // import env variables
@@ -17,7 +17,7 @@ require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT
-const COOKIE = process.env.PROJECT_DOMAIN
+const DOMAIN = process.env.PROJECT_DOMAIN
 
 let scopes = ['notifications', 'user:email', 'read:org', 'repo']
 passport.use(
@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://localhost:${port}/login/github/return`,
+      callbackURL: `http://localhost${(port === 80 || port === 443) ? "" : (":" + port)}/login/github/return`,
       scope: scopes.join(' ')
     },
     function (token, tokenSecret, profile, cb) {
@@ -65,32 +65,19 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 
 app.get('/', async (req, res) => {
-  // let data = {
-  //   session: req.cookies[COOKIE] && JSON.parse(req.cookies[COOKIE])
-  // }
-
-  // if (data.session && data.session.token) {
-  //   let githubData
-  //   try {
-  //     githubData = await getGitHubData(data.session.token)
-  //   } catch (error) {
-  //     githubData = { error: error }
-  //   }
-  //   _.extend(data, githubData)
-  // }
-
-  // if (data.session) {
-  //   data.session.token = 'mildly obfuscated.'
-  // }
-  // data.json = stringify(data, null, 2)
-
-  // res.render('main', data)
-
-  res.render('main', data);
+  const session = req.cookies[DOMAIN] && JSON.parse(req.cookies[DOMAIN]);
+  console.log('token', session.token);
+  const githubData = await updateGithubData(session.token);
+  // console.log("data", githubData);
+  const dateInfo = getDateInfo();
+  for (const item of githubData) {
+    console.log("item.path", item.path, 'data', item.data);
+  }
+  res.render('main', { contentList: githubData, dateInfo });
 })
 
 app.get('/logoff', function (req, res) {
-  res.clearCookie(COOKIE)
+  res.clearCookie(DOMAIN)
   res.redirect('/')
 })
 
@@ -106,7 +93,7 @@ app.get('/setcookie', function (req, res) {
     user: req.session.passport.user.profile._json,
     token: req.session.passport.user.token
   }
-  res.cookie(COOKIE, JSON.stringify(data))
+  res.cookie(DOMAIN, JSON.stringify(data))
   res.redirect('/')
 })
 
